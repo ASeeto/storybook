@@ -48,32 +48,48 @@ class AsyncItemLoader extends React.Component {
 storiesOf('Addons|Knobs.withKnobs', module)
   .addDecorator(withKnobs)
   .add('tweaks static values', () => {
-    const name = text('Name', 'Storyteller', 'GROUP-1');
-    const age = number('Age', 70, { range: true, min: 0, max: 90, step: 5 }, 'GROUP-2');
+    const name = text('Name', { value: 'Storyteller', groupId: 'GROUP-1' });
+    const age = number('Age', {
+      value: 70,
+      range: true,
+      min: 0,
+      max: 90,
+      step: 5,
+      groupId: 'GROUP-2',
+    });
     const fruits = {
       apple: 'Apple',
       banana: 'Banana',
       cherry: 'Cherry',
     };
-    const fruit = select('Fruit', fruits, 'apple', 'GROUP-3');
-    const dollars = number('Dollars', 12.5, { min: 0, max: 100, step: 0.01 }, 'GROUP-4');
-    const years = number('Years in NY', 9, {}, 'GROUP-5');
+    const fruit = select('Fruit', { options: fruits, value: 'apple', groupId: 'GROUP-3' });
+    const dollars = number('Dollars', {
+      value: 12.5,
+      min: 0,
+      max: 100,
+      step: 0.01,
+      groupId: 'GROUP-4',
+    });
+    const years = number('Years in NY', { value: 9, groupId: 'GROUP-5' });
 
-    const backgroundColor = color('background', '#ffff00', 'GROUP-6');
-    const items = array('Items', ['Laptop', 'Book', 'Whiskey'], ',', 'GROUP-7');
-    const otherStyles = object(
-      'Styles',
-      {
+    const backgroundColor = color('background', { value: '#ffff00', groupId: 'GROUP-6' });
+    const items = array('Items', {
+      value: ['Laptop', 'Book', 'Whiskey'],
+      separator: ',',
+      groupId: 'GROUP-7',
+    });
+    const otherStyles = object('Styles', {
+      value: {
         border: '3px solid #ff00ff',
         padding: '10px',
       },
-      'GROUP-8'
-    );
-    const nice = boolean('Nice', true, 'GROUP-9');
+      groupId: 'GROUP-8',
+    });
+    const nice = boolean('Nice', { value: true, groupId: 'GROUP-9' });
 
     // NOTE: the default value must not change - e.g., do not do date('Label', new Date()) or date('Label')
     const defaultBirthday = new Date('Jan 20 2017 GMT+0');
-    const birthday = date('Birthday', defaultBirthday, 'GROUP-10');
+    const birthday = date('Birthday', { value: defaultBirthday, groupId: 'GROUP-10' });
 
     const intro = `My name is ${name}, I'm ${age} years old, and my favorite fruit is ${fruit}.`;
     const style = { backgroundColor, ...otherStyles };
@@ -109,27 +125,29 @@ storiesOf('Addons|Knobs.withKnobsOptions', module)
     })
   )
   .add('tweaks static values with debounce delay', () => {
-    const name = text('Name', 'Storyteller');
-    const age = number('Age', 70, { range: true, min: 0, max: 90, step: 5 });
+    const name = text('Name', { value: 'Storyteller' });
+    const age = number('Age', { value: 70, range: true, min: 0, max: 90, step: 5 });
     const fruits = {
       apple: 'Apple',
       banana: 'Banana',
       cherry: 'Cherry',
     };
-    const fruit = select('Fruit', fruits, 'apple');
-    const dollars = number('Dollars', 12.5, { min: 0, max: 100, step: 0.01 });
+    const fruit = select('Fruit', { options: fruits, value: 'apple' });
+    const dollars = number('Dollars', { value: 12.5, min: 0, max: 100, step: 0.01 });
 
-    const backgroundColor = color('background', '#ffff00');
-    const items = array('Items', ['Laptop', 'Book', 'Whiskey']);
+    const backgroundColor = color('background', { value: '#ffff00' });
+    const items = array('Items', { value: ['Laptop', 'Book', 'Whiskey'] });
     const otherStyles = object('Styles', {
-      border: '3px solid #ff00ff',
-      padding: '10px',
+      value: {
+        border: '3px solid #ff00ff',
+        padding: '10px',
+      },
     });
-    const nice = boolean('Nice', true);
+    const nice = boolean('Nice', { value: true });
 
     // NOTE: the default value must not change - e.g., do not do date('Label', new Date()) or date('Label')
     const defaultBirthday = new Date('Jan 20 2017 GMT+0');
-    const birthday = date('Birthday', defaultBirthday);
+    const birthday = date('Birthday', { value: defaultBirthday });
 
     const intro = `My name is ${name}, I'm ${age} years old, and my favorite fruit is ${fruit}.`;
     const style = { backgroundColor, ...otherStyles };

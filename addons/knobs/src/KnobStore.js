@@ -8,10 +8,9 @@ export default class KnobStore {
     return this.store[key] !== undefined;
   }
 
-  set(key, value) {
-    this.store[key] = value;
+  set(key, data) {
+    this.store[key] = data;
     this.store[key].used = true;
-    this.store[key].groupId = value.groupId;
     this.callbacks.forEach(cb => cb());
   }
 
