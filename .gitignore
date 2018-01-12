@@ -4,7 +4,6 @@ node_modules
 .vscode
 *.sw*
 npm-shrinkwrap.json
-dist
 .tern-port
 *.DS_Store
 .cache
